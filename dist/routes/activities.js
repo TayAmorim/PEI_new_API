@@ -1,8 +1,7 @@
 export default async function activityRoutes(fastify) {
-    // Rota para buscar todas as atividades
     fastify.get('/', async (request, reply) => {
         const { data, error } = await fastify.supabase
-            .from('atividades') // Nome da sua tabela
+            .from('atividades')
             .select('*');
         if (error) {
             fastify.log.error(error);
@@ -10,5 +9,4 @@ export default async function activityRoutes(fastify) {
         }
         return data;
     });
-    // Aqui você pode adicionar as outras rotas (POST, PUT, DELETE)...
 }
