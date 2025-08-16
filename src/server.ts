@@ -6,6 +6,7 @@ import rootRoutes from './routes/root.js';
 import activityRoutes from './routes/activities.js';
 import authenticatePlugin from './plugins/authenticate.js'
 import type { VercelRequest, VercelResponse } from '@vercel/node';
+import authRoutes from './routes/auth.routes.js';
 
 dotenv.config();
 
@@ -16,10 +17,10 @@ const app = Fastify({
 
 app.register(cors, { origin: true });
 app.register(supabasePlugin);
-app.register(authenticatePlugin)
-
-
 app.register(rootRoutes);
+app.register(authRoutes, { prefix: "/auth" })
+
+app.register(authenticatePlugin)
 app.register(activityRoutes, { prefix: '/activities' });
 
 
