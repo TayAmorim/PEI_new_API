@@ -10,6 +10,10 @@ declare module 'fastify' {
 }
 const authenticatePlugin: FastifyPluginAsync = async (fastify) => {
   fastify.addHook('onRequest', async (request, reply) => {
+     if (request.url.startsWith('/auth/register')) {
+      return; 
+    }
+
     if (!request.headers.authorization) {
       return reply.code(401).send({ error: 'Você não tem permissão para acessar' });
     }
