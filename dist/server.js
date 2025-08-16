@@ -2,7 +2,6 @@ import Fastify from 'fastify';
 import dotenv from 'dotenv';
 import cors from '@fastify/cors';
 import supabasePlugin from './plugins/supabase.js';
-import rootRoutes from './routes/root.js';
 import activityRoutes from './routes/activities.js';
 import authenticatePlugin from './plugins/authenticate.js';
 import authRoutes from './routes/auth.routes.js';
@@ -12,7 +11,6 @@ const app = Fastify({
 });
 app.register(cors, { origin: true });
 app.register(supabasePlugin);
-app.register(rootRoutes);
 app.register(authRoutes, { prefix: "/auth" });
 app.register(authenticatePlugin);
 app.register(activityRoutes, { prefix: '/activities' });
