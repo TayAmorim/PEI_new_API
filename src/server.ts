@@ -2,7 +2,6 @@ import Fastify from 'fastify';
 import dotenv from 'dotenv';
 import cors from '@fastify/cors';
 import supabasePlugin from './plugins/supabase.js';
-import rootRoutes from './routes/root.js';
 import activityRoutes from './routes/activities.js';
 import authenticatePlugin from './plugins/authenticate.js'
 import type { VercelRequest, VercelResponse } from '@vercel/node';
@@ -17,7 +16,6 @@ const app = Fastify({
 
 app.register(cors, { origin: true });
 app.register(supabasePlugin);
-app.register(rootRoutes);
 app.register(authRoutes, { prefix: "/auth" })
 
 app.register(authenticatePlugin)

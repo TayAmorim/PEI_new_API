@@ -8,9 +8,11 @@ declare module 'fastify' {
     user?: User;
   }
 }
+
+
 const authenticatePlugin: FastifyPluginAsync = async (fastify) => {
   fastify.addHook('onRequest', async (request, reply) => {
-     if (request.url.startsWith('/auth/register')) {
+     if (request.url.startsWith('/auth/register') || request.url.startsWith('/auth/login')) {
       return; 
     }
 
