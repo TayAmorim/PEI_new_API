@@ -13,7 +13,21 @@ const app = Fastify({
 await app.register(fastifyCookie, {
     secret: process.env.COOKIE_SECRET,
 });
-app.register(cors, { origin: true });
+app.register(cors, { origin: (origin, callback) => {
+        if (!origin)
+            return callback(null, true);
+        const allowedOrigins = [
+            'http://localhost:3000'
+        ];
+        if (/\.app\.github\.dev$/.test(origin) || allowedOrigins.includes(origin)) {
+            return callback(null, true);
+        }
+        return callback(new Error('Not allowed by CORS'), false);
+    },
+    credentials: true,
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    methods: ['GET', 'PUT', 'POST', 'DELETE', 'OPTIONS'],
+});
 app.register(supabasePlugin);
 app.register(authRoutes, { prefix: "/auth" });
 app.register(authenticatePlugin);
