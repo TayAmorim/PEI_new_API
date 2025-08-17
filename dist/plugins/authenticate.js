@@ -4,13 +4,13 @@ const authenticatePlugin = async (fastify) => {
         if (request.url.startsWith('/auth/register') || request.url.startsWith('/auth/login')) {
             return;
         }
-        if (!request.headers.authorization) {
+        const token = request.cookies.acess_token;
+        if (!token) {
             return reply.code(401).send({ error: 'Você não tem permissão para acessar' });
         }
-        const token = request.headers.authorization.replace('Bearer ', '');
         const { data: { user }, error } = await request.server.supabase.auth.getUser(token);
         if (error || !user) {
-            return reply.code(401).send({ error: 'Token inválido' });
+            return reply.send({ error: error?.message });
         }
         request.user = user;
     });

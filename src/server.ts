@@ -1,6 +1,7 @@
 import Fastify from 'fastify';
 import dotenv from 'dotenv';
 import cors from '@fastify/cors';
+import fastifyCookie from '@fastify/cookie';
 import supabasePlugin from './plugins/supabase.js';
 import activityRoutes from './routes/activities.js';
 import authenticatePlugin from './plugins/authenticate.js'
@@ -11,6 +12,10 @@ dotenv.config();
 
 const app = Fastify({
   logger: true,
+});
+
+await app.register(fastifyCookie, {
+  secret: process.env.COOKIE_SECRET,
 });
 
 
