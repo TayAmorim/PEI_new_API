@@ -6,7 +6,6 @@ async function supabasePlugin(fastify) {
     fastify.addHook('onRequest', async (request) => {
         const accessToken = request.cookies.acess_token;
         const authHeader = accessToken ? `Bearer ${accessToken}` : undefined;
-        console.log('authHeader', authHeader);
         const supabase = createClient(supabaseUrl, supabaseKey, {
             global: {
                 headers: {

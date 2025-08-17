@@ -32,7 +32,7 @@ export default async function authRoutes(fastify) {
                 sameSite: 'lax',
                 maxAge: 60 * 60 * 24 * 3,
             });
-            return reply.code(200).send({ message: "Login Bem sucessido" });
+            return reply.code(200).send({ message: "Login Bem sucedido" });
         }
         return reply.code(500).send({ message: 'Ocorreu um erro inesperado.' });
     }),
