@@ -1,20 +1,20 @@
-import fastifyPlugin from 'fastify-plugin';
-import { createClient } from '@supabase/supabase-js';
+import fastifyPlugin from "fastify-plugin";
+import { createClient } from "@supabase/supabase-js";
 async function supabasePlugin(fastify) {
     const supabaseUrl = process.env.SUPABASE_URL;
     const supabaseKey = process.env.SUPABASE_KEY;
-    fastify.addHook('onRequest', async (request) => {
+    fastify.addHook("onRequest", async (request) => {
         const accessToken = request.cookies.acess_token;
         const authHeader = accessToken ? `Bearer ${accessToken}` : undefined;
         const supabase = createClient(supabaseUrl, supabaseKey, {
             global: {
                 headers: {
-                    ...(authHeader && { Authorization: authHeader })
-                }
+                    ...(authHeader && { Authorization: authHeader }),
+                },
             },
             auth: {
-                persistSession: false
-            }
+                persistSession: false,
+            },
         });
         request.server.supabase = supabase;
     });

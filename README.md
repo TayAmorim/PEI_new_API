@@ -29,6 +29,7 @@ Este projeto foi construído com as seguintes tecnologias:
 ## 📋 Pré-requisitos
 
 Antes de começar, você vai precisar ter as seguintes ferramentas instaladas em sua máquina:
+
 - [Node.js](https://nodejs.org/en/) (versão 18.x ou superior recomendada)
 - [Yarn](https://yarnpkg.com/) ou [npm](https://www.npmjs.com/)
 - [Git](https://git-scm.com/)
@@ -74,14 +75,15 @@ $ npm run start:dev
 
 Aqui estão alguns dos principais endpoints disponíveis:
 
-| Método HTTP | Rota                     | Descrição                                         | Protegida? |
-| :---------- | :----------------------- | :-------------------------------------------------- | :--------- |
-| `POST`      | `/auth/login`            | Autentica um usuário (ADEE) e retorna um token JWT. | Não        |
-| `POST`      | `/users`                 | Cria um novo usuário.                               | Não/Admin  |
-| `GET`       | `/activities`            | Retorna todas as atividades do usuário logado.      | Sim        |
-| `POST`      | `/activities`            | Cria uma nova atividade para o usuário logado.      | Sim        |
-| `PUT`       | `/activities/:id`        | Atualiza uma atividade específica.                  | Sim        |
-| `DELETE`    | `/activities/:id`        | Deleta uma atividade específica.                    | Sim        |
+| Método HTTP | Rota              | Descrição                                           | Protegida? |
+| :---------- | :---------------- | :-------------------------------------------------- | :--------- |
+| `POST`      | `/auth/login`     | Autentica um usuário (ADEE) e retorna um token JWT. | Não        |
+| `POST`      | `/users`          | Cria um novo usuário.                               | Não/Admin  |
+| `GET`       | `/activities`     | Retorna todas as atividades do usuário logado.      | Sim        |
+| `POST`      | `/activities`     | Cria uma nova atividade para o usuário logado.      | Sim        |
+| `PUT`       | `/activities/:id` | Atualiza uma atividade específica.                  | Sim        |
+| `DELETE`    | `/activities/:id` | Deleta uma atividade específica.                    | Sim        |
 
 ---
-Feito com ❤️ por [Tayanna Amorim]([https://seu-link-aqui.com](https://github.com/TayAmorim))
+
+Feito com ❤️ por [Tayanna Amorim](<[https://seu-link-aqui.com](https://github.com/TayAmorim)>)
