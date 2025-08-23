@@ -40,4 +40,58 @@ export default async function activityRoutes(fastify) {
         }
         return reply.code(201).send(data);
     });
+    fastify.delete("/:id", async (request, reply) => {
+        const { id } = request.params;
+        if (!request.user || !request.user.id) {
+            return reply.code(401).send({ message: "Usuário não autenticado." });
+        }
+        const { data: existingActivity, error: fetchError } = await fastify.supabase
+            .from("atividades")
+            .select("user_id")
+            .eq("id", id)
+            .single();
+        if (fetchError) {
+            fastify.log.error(fetchError);
+            return reply.code(500).send({ message: "Erro ao buscar atividade." });
+        }
+        if (!existingActivity) {
+            return reply.code(404).send({ message: "Atividade não encontrada." });
+        }
+        const { error: deleteError } = await fastify.supabase
+            .from("atividades")
+            .delete()
+            .eq("id", id);
+        if (deleteError) {
+            fastify.log.error(deleteError);
+            return reply.code(500).send({ message: "Erro ao deletar atividade." });
+        }
+        return reply.code(204).send();
+    });
+    fastify.put("/:id", { schema }, async (request, reply) => {
+        const { id } = request.params;
+        const { title, date, status, avalition, objecttives, type } = (await request.body);
+        const { data: existingActivity, error: fetchError } = await fastify.supabase
+            .from("atividades")
+            .select("user_id")
+            .eq("id", id)
+            .single();
+        if (fetchError) {
+            fastify.log.error(fetchError);
+            return reply.code(500).send({ message: "Erro ao buscar atividade." });
+        }
+        if (!existingActivity) {
+            return reply.code(404).send({ message: "Atividade não encontrada." });
+        }
+        const { data, error: updateError } = await fastify.supabase
+            .from("atividades")
+            .update({ title, date, status, avalition, objecttives, type })
+            .eq("id", id)
+            .select()
+            .single();
+        if (updateError) {
+            fastify.log.error(updateError);
+            return reply.code(500).send({ message: "Erro ao atualizar atividade." });
+        }
+        return reply.code(200).send(data);
+    });
 }
