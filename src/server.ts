@@ -37,6 +37,10 @@ app.register(supabasePlugin);
 app.register(authRoutes, { prefix: "/auth" });
 
 app.register(authenticatePlugin);
+
+app.get("/me", async (request, reply) => {
+   return reply.send(request.user);
+});
 app.register(activityRoutes, { prefix: "/activities" });
 
 export default async (req: VercelRequest, res: VercelResponse) => {
