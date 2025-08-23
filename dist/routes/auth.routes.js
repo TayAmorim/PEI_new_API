@@ -77,13 +77,4 @@ export default async function authRoutes(fastify) {
             reply.setCookie("refresh_token", data.session.refresh_token);
             return reply.code(200).send({ message: "Sessão atualizada." });
         }));
-    fastify.get("/logout", async (request, reply) => {
-        const { error } = await fastify.supabase.auth.signOut();
-        if (error) {
-            return reply.code(500).send({ message: "Erro ao realizar o logout" });
-        }
-        reply.clearCookie("acess_token", { path: "/" });
-        reply.clearCookie("refresh_token", { path: "/" });
-        return reply.code(200).send({ message: "Sucesso" });
-    });
 }

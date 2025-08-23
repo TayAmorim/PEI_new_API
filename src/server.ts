@@ -7,7 +7,7 @@ import activityRoutes from "./routes/activities.js";
 import authenticatePlugin from "./plugins/authenticate.js";
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import authRoutes from "./routes/auth.routes.js";
-import rootRoutes from "./routes/rooots.js";
+import userRoutes from "./routes/user.js";
 
 dotenv.config();
 
@@ -39,7 +39,7 @@ app.register(authRoutes, { prefix: "/auth" });
 
 app.register(authenticatePlugin);
 
-app.register(rootRoutes, {prefix: "/user"});
+app.register(userRoutes, {prefix: "/user"});
 app.register(activityRoutes, { prefix: "/activities" });
 
 export default async (req: VercelRequest, res: VercelResponse) => {

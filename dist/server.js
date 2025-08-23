@@ -6,7 +6,7 @@ import supabasePlugin from "./plugins/supabase.js";
 import activityRoutes from "./routes/activities.js";
 import authenticatePlugin from "./plugins/authenticate.js";
 import authRoutes from "./routes/auth.routes.js";
-import rootRoutes from "./routes/rooots.js";
+import userRoutes from "./routes/user.js";
 dotenv.config();
 const app = Fastify({
     logger: true,
@@ -31,7 +31,7 @@ app.register(cors, {
 app.register(supabasePlugin);
 app.register(authRoutes, { prefix: "/auth" });
 app.register(authenticatePlugin);
-app.register(rootRoutes, { prefix: "/user" });
+app.register(userRoutes, { prefix: "/user" });
 app.register(activityRoutes, { prefix: "/activities" });
 export default async (req, res) => {
     await app.ready();
