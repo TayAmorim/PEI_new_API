@@ -30,11 +30,12 @@ export default async function authRoutes(fastify) {
                 path: "/",
                 httpOnly: true,
                 secure: true,
+                sameSite: "none",
             });
             reply.setCookie("refresh_token", data.session.refresh_token, {
                 path: "/",
                 httpOnly: true,
-                sameSite: "lax",
+                sameSite: "none",
                 maxAge: 60 * 60 * 24 * 3,
             });
             return reply.code(200).send({ message: "Login Bem sucedido" });
