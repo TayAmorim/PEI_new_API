@@ -88,12 +88,20 @@ export default async function authRoutes(fastify: FastifyInstance) {
       reply.setCookie("refresh_token", data.session.refresh_token);
       return reply.code(200).send({ message: "Sessão atualizada." });
     }));
-  fastify.get("/me", async (request, reply) => {
-    const { data, error } = await fastify.supabase.auth.getUser();
+  fastify.get("/", async (request, reply) => {
+    const { error } = await fastify.supabase.auth.getUser();
     if (error) {
-      const { status, message } = error;
-      return reply.code(status || 401).send({ message });
+      return reply.code(401).send({ message: "usuário não autenticado" });
     }
-    return reply.code(200).send(data.user);
+    return reply.code(200).send({ message: "Usuario autenticado" });
+  });
+  fastify.get("/logout", async (request, reply) => {
+    const { error } = await fastify.supabase.auth.signOut();
+    if (error) {
+      return reply.code(500).send({ message: "Erro ao realizar o logout" });
+    }
+    reply.clearCookie("acess_token", { path: "/" });
+    reply.clearCookie("refresh_token", { path: "/" });
+    return reply.code(200).send({ message: "Sucesso" });
   });
 }
