@@ -1,18 +1,5 @@
 import { FastifyInstance } from "fastify/types/instance.js";
-import { UserAuthProps } from "../types/index.js";
-
-const userBodyJsonSchema = {
-  type: "object",
-  required: ["email", "password"],
-  properties: {
-    email: { type: "string" },
-    password: { type: "string" },
-  },
-};
-
-const schema = {
-  body: userBodyJsonSchema,
-};
+import { NewUser, schema, schema2, UserAuthProps } from "../types/index.js";
 
 export default async function authRoutes(fastify: FastifyInstance) {
   (fastify.post("/login", { schema }, async (request, reply) => {
@@ -50,11 +37,16 @@ export default async function authRoutes(fastify: FastifyInstance) {
     }
     return reply.code(500).send({ message: "Ocorreu um erro inesperado." });
   }),
-    fastify.post("/register", { schema }, async (request, reply) => {
-      const { email, password } = (await request.body) as UserAuthProps;
-      const { data, error } = await fastify.supabase.auth.signUp({
+    fastify.post("/register", { schema: schema2 }, async (request, reply) => {
+      const { email, password, name } = (await request.body) as NewUser;
+      const {  error } = await fastify.supabase.auth.signUp({
         email,
         password,
+        options: {
+          data: {
+            name: name,
+          },
+        },
       });
 
       if (error) {
@@ -66,7 +58,7 @@ export default async function authRoutes(fastify: FastifyInstance) {
         }
         return { status, message };
       }
-      return reply.code(201).send(data.user);
+      return reply.code(201).send({ message: "Usuário criado com sucesso." });
     }),
     fastify.post("/refresh", async (request, reply) => {
       const refreshToken = request.cookies.refresh_token;

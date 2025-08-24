@@ -1,6 +1,13 @@
 export default async function userRoutes(fastify) {
     fastify.get("/me", async (request, reply) => {
-        return reply.send(request.user);
+        const { data, error } = await fastify.supabase
+            .from("profiles")
+            .select("*");
+        if (error) {
+            fastify.log.error(error);
+            return reply.code(500).send({ message: "Erro ao buscar perfil." });
+        }
+        return data;
     });
     fastify.get("/logout", async (request, reply) => {
         const { error } = await fastify.supabase.auth.signOut();
