@@ -74,7 +74,18 @@ export default async function authRoutes(fastify) {
                     .code(401)
                     .send({ message: "Não foi possível atualizar a sessão." });
             }
-            reply.setCookie("refresh_token", data.session.refresh_token);
+            reply.setCookie("acess_token", data.session.access_token, {
+                path: "/",
+                httpOnly: true,
+                secure: true,
+                sameSite: "none",
+            });
+            reply.setCookie("refresh_token", data.session.refresh_token, {
+                path: "/",
+                httpOnly: true,
+                sameSite: "none",
+                maxAge: 60 * 60 * 24 * 3,
+            });
             return reply.code(200).send({ message: "Sessão atualizada." });
         }));
 }

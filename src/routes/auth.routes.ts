@@ -86,6 +86,12 @@ export default async function authRoutes(fastify: FastifyInstance) {
           .code(401)
           .send({ message: "Não foi possível atualizar a sessão." });
       }
+      reply.setCookie("acess_token", data.session.access_token, {
+        path: "/",
+        httpOnly: true,
+        secure: true,
+        sameSite: "none",
+      });
       reply.setCookie("refresh_token", data.session.refresh_token, {
         path: "/",
         httpOnly: true,
