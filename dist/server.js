@@ -18,8 +18,8 @@ app.register(cors, {
     origin: (origin, callback) => {
         if (!origin)
             return callback(null, true);
-        const allowedOrigins = ["http://localhost:3000"];
-        if (/\.app\.github\.dev$/.test(origin) || allowedOrigins.includes(origin)) {
+        const allowedOrigins = ["http://localhost:3000", process.env.FRONT_URL];
+        if (allowedOrigins.includes(origin)) {
             return callback(null, true);
         }
         return callback(new Error("Not allowed by CORS"), false);
