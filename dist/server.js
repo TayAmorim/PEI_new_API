@@ -8,6 +8,7 @@ import authenticatePlugin from "./plugins/authenticate.js";
 import authRoutes from "./routes/auth.routes.js";
 import userRoutes from "./routes/user.js";
 dotenv.config();
+const url_plat = process.env.FRONT_URL;
 const app = Fastify({
     logger: true,
 });
@@ -18,7 +19,7 @@ app.register(cors, {
     origin: (origin, callback) => {
         if (!origin)
             return callback(null, true);
-        const allowedOrigins = ["http://localhost:3000", process.env.FRONT_URL];
+        const allowedOrigins = ["http://localhost:3000", url_plat];
         if (allowedOrigins.includes(origin)) {
             return callback(null, true);
         }
