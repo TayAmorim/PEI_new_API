@@ -1,7 +1,7 @@
 # Pei - API da Plataforma de Educação Inclusiva
 
 ![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)
-![Status](https://img.shields.io/badge/status-em%20desenvolvimento-yellow.svg)
+![Status](https://img.shields.io/badge/status-concluido-green.svg)
 
 ## 🚀 Sobre o Projeto
 
