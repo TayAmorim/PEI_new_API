@@ -5,7 +5,7 @@
 
 ## 🚀 Sobre o Projeto
 
-Esta é a API RESTful que serve como o back-end para a **Pei - Plataforma de Educação Inclusiva**.
+Esta é a API  que serve como o back-end para a **Pei - Plataforma de Educação Inclusiva**.
 
 A Pei é uma solução digital especializada para apoiar o trabalho dos Auxiliares de Desenvolvimento da Educação Especial (ADEE). O principal objetivo é automatizar o diário de classe, proporcionando um registro eficaz e centralizado das atividades escolares. O projeto visa melhorar a eficiência dos ADEEs, facilitando o acompanhamento e o registro das atividades de forma mais organizada e acessível.
 
@@ -23,8 +23,7 @@ Este projeto foi construído com as seguintes tecnologias:
 - **[Fastify](https://fastify.dev/):** Um framework web de alta performance e baixo overhead para Node.js, focado em velocidade e uma arquitetura baseada em plugins.
 - **[Supabase](https://supabase.com/):** Uma plataforma de back-end de código aberto, alternativa ao Firebase. Fornece o banco de dados PostgreSQL, sistema de autenticação, e armazenamento de arquivos.
 - **[TypeScript](https://www.typescriptlang.org/):** Um superset do JavaScript que adiciona tipagem estática ao código, aumentando a robustez e a manutenibilidade.
-- **[PostgreSQL](https://www.postgresql.org/):** O robusto e confiável banco de dados relacional que alimenta a plataforma Supabase.
-- **[JWT (JSON Web Tokens)](https://jwt.io/):** Utilizado para criar e validar os tokens de acesso que o sistema de autenticação do Supabase gerencia, garantindo a segurança das rotas da API.
+
 
 ## 📋 Pré-requisitos
 
@@ -34,42 +33,6 @@ Antes de começar, você vai precisar ter as seguintes ferramentas instaladas em
 - [Yarn](https://yarnpkg.com/) ou [npm](https://www.npmjs.com/)
 - [Git](https://git-scm.com/)
 - Uma instância do [PostgreSQL](https://www.postgresql.org/download/) rodando (ou um container [Docker](https://www.docker.com/) com a imagem do Postgres).
-
-## ⚙️ Como Executar o Projeto
-
-Siga os passos abaixo para rodar o projeto em seu ambiente local:
-
-```bash
-# 1. Clone este repositório
-$ git clone [https://github.com/TayAmorim/PEI_API.git](https://github.com/TayAmorim/PEI_API.git)
-
-# 2. Navegue para a pasta do projeto
-$ cd nome-da-pasta-do-projeto
-
-# 3. Instale as dependências
-$ npm install
-# ou
-$ yarn install
-
-# 4. Configure as variáveis de ambiente
-# Copie o arquivo .env.example para um novo arquivo .env
-$ cp .env.example .env
-
-# Abra o arquivo .env e adicione a URL de conexão do seu banco de dados:
-# Exemplo para PostgreSQL:
-DATABASE_URL="postgresql://USUARIO:SENHA@HOST:PORTA/NOME_DO_BANCO"
-
-# Adicione também um segredo para o JWT:
-JWT_SECRET="SEU_SEGREDO_SUPER_SECRETO"
-
-# 5. Rode as migrations do Prisma para criar as tabelas no banco
-$ npx prisma migrate dev
-
-# 6. Inicie o servidor em modo de desenvolvimento
-$ npm run start:dev
-
-# O servidor estará rodando em http://localhost:3000 (ou a porta que você configurar)
-```
 
 ## 📝 Endpoints da API (Exemplos)
 
